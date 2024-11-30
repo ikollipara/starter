@@ -1,9 +1,9 @@
 {
-    "name": "test",
+    "name": "{{ cookiecutter.__project_slug }}",
     "private": "true",
     "author": {
-        "name": "test",
-        "email": "e@e.tex"
+        "name": "{{ cookiecutter.author_name }}",
+        "email": "{{ cookiecutter.author_email }}"
     },
     "scripts": {
         "dev": "rollup --config rollup.config.mjs -w",
