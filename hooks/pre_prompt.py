@@ -8,6 +8,8 @@ PrePrompt Scripting
 
 import enum
 import io
+import platform
+import shutil
 import sys
 import typing
 
@@ -59,3 +61,30 @@ write(f"Version {__version__}")
 write("----------------------------------------------------------")
 write()
 write()
+
+
+### Checks ###
+
+if sys.version_info.minor < 12:
+    write(
+        f"Invalid Python Version ({platform.python_version()} < 3.12)",
+        Color.RED,
+        writer=sys.stderr,
+    )
+    exit(1)
+
+if not shutil.which("uv"):
+    write("UV is not installed. Please install UV", Color.RED, writer=sys.stderr)
+    exit(1)
+
+if not shutil.which("node") or not shutil.which("npm"):
+    write(
+        "Node and NPM are not installed. Please install Node and NPM",
+        Color.RED,
+        writer=sys.stderr,
+    )
+    exit(1)
+
+if not shutil.which("just"):
+    write("Just is not installed. Please install Just.", Color.RED, writer=sys.stderr)
+    exit(1)
