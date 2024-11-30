@@ -1,0 +1,31 @@
+#---------------------------#
+# {{ cookiecutter.project_name }} Just Configuration
+# {{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>
+#---------------------------#
+
+set dotenv-load
+
+
+alias m := manage
+
+manage command:
+    uv run python manage.py {% raw %}{{command}}{% endraw %}
+
+migrate:
+    uv run python manage.py makemigrations
+    uv run python manage.py migrate
+
+[dotenv-filename=".env.testing"]
+test +FLAGS='':
+    uv run python manage.py test {% raw %}{{FLAGS}}{% endraw %}
+
+coverage:
+    coverage erase
+    coverage run --source='.' manage.py test
+    coverage report -m --skip-covered
+
+dev-ui:
+    npm run dev
+
+dev:
+    uv run python manage.py runserver
