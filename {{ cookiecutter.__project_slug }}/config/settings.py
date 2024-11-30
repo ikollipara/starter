@@ -48,6 +48,7 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = options(
     [
+        "{{ cookiecutter.__project_slug }}",
         "whitenoise.runserver_nostatic",
         "django_components",
         "django.contrib.admin",
@@ -191,6 +192,7 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by email
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+AUTH_USER_MODEL = "{{ cookiecutter.__project_slug }}.User"
 
 
 COMPONENTS = {"dirs": []}

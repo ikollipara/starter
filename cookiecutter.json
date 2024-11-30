@@ -4,6 +4,7 @@
     "author_name": "",
     "author_email": "{{ author_name }}@example.com",
     "__project_slug": "{{ cookiecutter.project_name|replace(' ', '_')|replace('-', '_')|lower }}",
+    "__project_app_class": "{{ cookiecutter.__project_slug|replace('_', ' ')|title|replace(' ', '') }}",
     "install_deps": true,
     "first_commit": true,
     "__prompts__": {
