@@ -1,0 +1,28 @@
+[project]
+name = "my_project"
+authors = [{name = "name", email = "e@e.txt"}]
+description = "My Project"
+version = "0.0.0"
+dependencies = [
+    "Django>=5.1",
+    "django-allauth>=65.2",
+    "huey>=2.5",
+    "whitenoise>=6.8",
+    "django-rich>=1.13",
+    "ipython>=8.30",
+    "django-environ>=0.11.2"
+]
+
+[tool.uv]
+dev-dependencies = [
+    "django-browser-reload",
+    "django-debug-toolbar",
+    "django-simple-factory",
+    "ruff",
+    "ipdb",
+    "djade",
+    "coverage",
+]
+
+[tool.ruff.isort]
+force-single-line = true
