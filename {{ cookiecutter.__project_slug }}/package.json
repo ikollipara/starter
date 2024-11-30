@@ -1,0 +1,25 @@
+{
+    "name": "test",
+    "private": "true",
+    "author": {
+        "name": "test",
+        "email": "e@e.tex"
+    },
+    "scripts": {
+        "dev": "rollup --config rollup.config.mjs -w",
+        "build": "rollup --config rollup.config.mjs"
+    },
+    "dependencies": {
+        "htmx.org": "^1.9.12",
+        "@hotwired/stimulus": "^3.2.2",
+        "sprucecss": "^2.3.3"
+    },
+    "devDependencies": {
+        "rollup": "^4.28.0",
+        "@rollup/plugin-node-resolve": "^15.3.0",
+        "rollup-plugin-postcss": "^4.0.2",
+        "postcss": "^8.4.49",
+        "sass": "^1.81.0",
+        "@biomejs/biome": "^1.9.4"
+    }
+}
