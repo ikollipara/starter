@@ -12,6 +12,7 @@ from django.contrib import admin
 
 urlpatterns = [
     urls.path("admin/", admin.site.urls),
+    urls.path("accounts/", urls.include("allauth.urls")),
     urls.path(
         conf.settings.STATIC_URL,
         *static.static(document_root=conf.settings.STATIC_ROOT),
