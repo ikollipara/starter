@@ -3,8 +3,6 @@
 # {{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>
 #---------------------------#
 
-set dotenv-load
-
 
 alias m := manage
 
