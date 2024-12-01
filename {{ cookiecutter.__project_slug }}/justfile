@@ -26,3 +26,35 @@ dev-ui:
 
 dev:
     uv run python manage.py runserver
+
+add-app name:
+    #! /usr/bin/env python3
+
+    import pathlib
+
+    snake_case = name
+    camel_case = "".join([x.title() for x in name.split("_")])
+
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case).mkdir(exists_ok=True)
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "__init__.py").touch()
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "apps.py").write_text(
+        "from django.apps import AppConfig\n\n"
+        f"class {camel_case}Config(AppConfig):\n"
+        f"    name = {snake_name}"
+    )
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "models.py").touch()
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "tests.py").touch()
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "migrations").mkdir(exists_ok=True)
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / camel_case / "migrations" / "__init__.py").touch()
+
+    print("Make sure to register the app!")
+
+add-tasks appname:
+    path_exists({{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %}) && touch {{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %} / tasks.py
+
+add-forms appname:
+    path_exists({{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %}) && touch {{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %} / forms.py
+
+add-views appname:
+    path_exists({{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %}) && touch {{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %} / views.py
+    path_exists({{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %}) && touch {{ cookiecutter.__project_slug }} / {% raw %}{{appname}}{% endraw %} / urls.py
