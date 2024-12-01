@@ -2,17 +2,13 @@
     "project_name": "",
     "project_description": "",
     "author_name": "",
-    "author_email": "{{ author_name }}@example.com",
+    "author_email": "{{ cookiecutter.author_name }}@example.com",
     "__project_slug": "{{ cookiecutter.project_name|replace(' ', '_')|replace('-', '_')|lower }}",
     "__project_app_class": "{{ cookiecutter.__project_slug|replace('_', ' ')|title|replace(' ', '') }}",
-    "install_deps": true,
-    "first_commit": true,
     "__prompts__": {
         "project_name": "What is the name of the project?",
         "project_description": "What is a one sentence summary of the project?",
         "author_name": "What is your name?",
-        "author_email": "What is your email?",
-        "install_deps": "Install Dependencies?",
-        "first_commit": "Make initial project commit?"
+        "author_email": "What is your email?"
     }
 }
