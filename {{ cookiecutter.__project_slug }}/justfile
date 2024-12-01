@@ -49,6 +49,7 @@ add-app name:
     )
     (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / snake_case / "models.py").touch()
     (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / snake_case / "tests.py").touch()
+    (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / snake_case / "factories.py").touch()
     (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / snake_case / "migrations").mkdir(exists_ok=True)
     (pathlib.Path.cwd() / {{ cookiecutter.__project_slug }} / snake_case / "migrations" / "__init__.py").touch()
 
