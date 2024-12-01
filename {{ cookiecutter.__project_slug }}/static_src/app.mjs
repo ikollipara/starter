@@ -5,6 +5,7 @@
  * Frontend Entrypoint
  *------------------------------------------------------------**/
 
+import "./scss/app.scss";
 import htmx from "htmx.org";
 import { Application } from "@hotwired/stimulus";
 
