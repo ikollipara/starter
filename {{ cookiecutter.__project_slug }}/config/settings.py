@@ -19,10 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(DEBUG=(bool, False))
 
+environ.Env.read_env(BASE_DIR / ".env")
 if "test" in sys.argv:
     environ.Env.read_env(BASE_DIR / ".env.testing")
-else:
-    environ.Env.read_env(BASE_DIR / ".env")
 
 
 def devel(value):
@@ -159,7 +158,6 @@ LOGGING = {
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_FINDERS = [
     # Default finders
     "django.contrib.staticfiles.finders.FileSystemFinder",

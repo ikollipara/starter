@@ -13,14 +13,8 @@ from django.contrib import admin
 urlpatterns = [
     urls.path("admin/", admin.site.urls),
     urls.path("accounts/", urls.include("allauth.urls")),
-    urls.path(
-        conf.settings.STATIC_URL,
-        *static.static(document_root=conf.settings.STATIC_ROOT),
-    ),
-    urls.path(
-        conf.settings.MEDIA_URL,
-        *static.static(document_root=conf.settings.MEDIA_ROOT),
-    ),
+    *static.static(conf.settings.STATIC_URL, document_root=conf.settings.STATIC_ROOT),
+    *static.static(conf.settings.MEDIA_URL, document_root=conf.settings.MEDIA_ROOT),
 ]
 
 if conf.settings.DEBUG:
