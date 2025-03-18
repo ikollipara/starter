@@ -1,18 +1,18 @@
 [project]
 name = "{{ cookiecutter.__project_slug }}"
-authors = [{name = "{{ cookiecutter.author_name }}", email = "{{ cookiecutter.author_email }}"}]
+authors = [
+    { name = "{{ cookiecutter.author_name }}", email = "{{ cookiecutter.author_email }}" },
+]
 description = "{{ cookiecutter.project_description }}"
 version = "0.0.0"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
-    "Django>=5.1",
-    "django-allauth>=65.2",
-    "huey>=2.5",
+    "django>=5.1",
+    {% if cookiecutter.allauth %}"django-allauth>=65.2",{% endif %}
     "whitenoise>=6.8",
     "django-rich>=1.13",
-    "ipython>=8.30",
-    "django-environ>=0.11.2",
-    "django-components>=0.114",
+    "envrions[django]>=14.1.1",
+    "django-extensions>=3.2.3",
 ]
 
 [tool.uv]
@@ -24,7 +24,25 @@ dev-dependencies = [
     "ipdb",
     "djade",
     "coverage",
+    "tblib",
 ]
 
 [tool.ruff.isort]
 force-single-line = true
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = ["conf/*.py", "manage.py"]
+concurrency = ["multiprocessing"]
+source = ["."]
+command_line = "manage.py test --keepdb --parallel"
+
+[tool.coverage.report]
+omit = ["conf/*.py", "manage.py"]
+show_missing = true
+skip_covered = true
+
+[tool.ruff.lint.isort.sections]
+# Group all Django imports into a separate section.
+"django" = ["django"]

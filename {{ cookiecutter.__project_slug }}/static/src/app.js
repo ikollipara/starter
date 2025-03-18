@@ -1,13 +1,15 @@
 /**------------------------------------------------------------
- * app.mjs
- * {{ cookiecutter.author_name }} <{{cookiecutter.author_email }}>
+ * app.js
+ * Ian Kollipara
  *
- * Frontend Entrypoint
+ * Main Entrypoint
  *------------------------------------------------------------**/
 
 import "./scss/app.scss";
-import htmx from "htmx.org";
+import * as Turbo from "@hotwired/turbo";
 import { Application } from "@hotwired/stimulus";
 
-window.htmx = htmx;
+window.Turbo = Turbo;
 window.Stimulus = Application.start();
+
+// Register Controllers

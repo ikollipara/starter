@@ -65,9 +65,9 @@ write()
 
 ### Checks ###
 
-if sys.version_info.minor < 12:
+if sys.version_info.minor < 13:
     write(
-        f"Invalid Python Version ({platform.python_version()} < 3.12)",
+        f"Invalid Python Version ({platform.python_version()} < 3.13)",
         Color.RED,
         writer=sys.stderr,
     )
@@ -85,6 +85,10 @@ if not shutil.which("node") or not shutil.which("npm"):
     )
     exit(1)
 
-if not shutil.which("just"):
-    write("Just is not installed. Please install Just.", Color.RED, writer=sys.stderr)
+if not shutil.which("direnv"):
+    write(
+        "direnv are not installed. Please install direnv",
+        Color.RED,
+        writer=sys.stderr,
+    )
     exit(1)

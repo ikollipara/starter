@@ -1,10 +1,12 @@
 // To learn more about SpruceCSS
 // Check out https://sprucecss.com/docs/
 
-@use 'sprucecss/css/spruce';
+@use 'sprucecss/css/spruce' as *;
+
+@include generate-styles();
 
 .container {
     --inline-size: 10rem;
 
-    @include spruce.layout-flex
+    @include layout-flex
 }

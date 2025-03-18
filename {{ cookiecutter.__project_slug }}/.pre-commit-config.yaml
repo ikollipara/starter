@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.12
+  python: python3.13
   node: 22.5.1
 
 repos:
@@ -29,7 +29,7 @@ repos:
       - id: typos
         args: []
 
-  - repo: https://github.com/biomjs/pre-commit
+  - repo: https://github.com/biomejs/pre-commit
     rev: ""
     hooks:
       - id: biome-check
@@ -37,7 +37,7 @@ repos:
         files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|css|svelte|vue|astro|graphql|gql)$"
 
   - repo: https://github.com/thoughtworks/talisman
-    rev: 'v1.28.0'  # Update me!
+    rev: "v1.28.0" # Update me!
     hooks:
       # both pre-commit and pre-push supported
       # -   id: talisman-push

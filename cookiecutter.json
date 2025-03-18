@@ -1,14 +1,16 @@
 {
-    "project_name": "",
-    "project_description": "",
-    "author_name": "",
-    "author_email": "{{ cookiecutter.author_name }}@example.com",
-    "__project_slug": "{{ cookiecutter.project_name|replace(' ', '_')|replace('-', '_')|lower }}",
-    "__project_app_class": "{{ cookiecutter.__project_slug|replace('_', ' ')|title|replace(' ', '') }}",
-    "__prompts__": {
-        "project_name": "What is the name of the project?",
-        "project_description": "What is a one sentence summary of the project?",
-        "author_name": "What is your name?",
-        "author_email": "What is your email?"
-    }
+  "project_name": "",
+  "project_description": "",
+  "author_name": "",
+  "allauth": true,
+  "author_email": "{{ cookiecutter.author_name }}@example.com",
+  "__project_slug": "{{ cookiecutter.project_name|replace(' ', '_')|replace('-', '_')|lower }}",
+  "__project_app_class": "{{ cookiecutter.__project_slug|replace('_', ' ')|title|replace(' ', '') }}",
+  "__prompts__": {
+    "project_name": "What is the name of the project?",
+    "project_description": "What is a one sentence summary of the project?",
+    "author_name": "What is your name?",
+    "author_email": "What is your email?",
+    "allauth": "Install Django-Allauth?"
+  }
 }
