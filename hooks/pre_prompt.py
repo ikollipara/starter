@@ -65,14 +65,6 @@ write()
 
 ### Checks ###
 
-if sys.version_info.minor < 13:
-    write(
-        f"Invalid Python Version ({platform.python_version()} < 3.13)",
-        Color.RED,
-        writer=sys.stderr,
-    )
-    exit(1)
-
 if not shutil.which("uv"):
     write("UV is not installed. Please install UV", Color.RED, writer=sys.stderr)
     exit(1)

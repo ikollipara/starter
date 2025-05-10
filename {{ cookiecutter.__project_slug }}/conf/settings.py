@@ -32,10 +32,11 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    {% if cookiecutter.allauth %}"allauth", {% endif %}
-    {% if cookiecutter.allauth %}"allauth.account", {% endif %}
+    {%- if cookiecutter.allauth %}"allauth", {% endif %}
+    {%- if cookiecutter.allauth %}"allauth.account", {% endif %}
     "django_browser_reload",
-    "debug_toolbar",
+    {%- if cookiecutter.debug_toolbar %}"debug_toolbar", {% endif %}
+    "django_extensions",
     "django_simple_factory",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -51,13 +52,13 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    {% if cookiecutter.allauth %}"allauth.account.middleware.AccountMiddleware",{% endif %}
+    {%- if cookiecutter.allauth %}"allauth.account.middleware.AccountMiddleware",{% endif %}
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    {%- if cookiecutter.debug_toolbar %}"debug_toolbar.middleware.DebugToolbarMiddleware",{% endif %}
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "conf.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -84,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "conf.wsgi.application"
 
 INTERNAL_IPS = env.list("INTERNAL_IPS", [])
 LOG_LEVEL = env.str("LOG_LEVEL")
@@ -124,11 +125,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static" / "public",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_FINDERS = [
-    # Default finders
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -175,7 +171,7 @@ TEST_RUNNER = "django_rich.test.RichRunner"
 STORAGES = {
     # ...
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": env.str("STORAGES_BACKEND"),
     },
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
 }

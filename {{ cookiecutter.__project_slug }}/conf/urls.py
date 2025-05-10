@@ -18,9 +18,9 @@ urlpatterns = [
 ]
 
 if conf.settings.DEBUG:
-    from debug_toolbar import toolbar
+    {%- if cookiecutter.debug_toolbar %}from debug_toolbar import toolbar{% endif %}
 
     urlpatterns.append(
         urls.path("__reload__/", urls.include("django_browser_reload.urls"))
     )
-    urlpatterns += toolbar.debug_toolbar_urls()
+    {%- if cookiecutter.debug_toolbar %}urlpatterns += toolbar.debug_toolbar_urls(){% endif %}

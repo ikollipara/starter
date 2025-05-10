@@ -8,17 +8,17 @@ version = "0.0.0"
 requires-python = ">=3.13"
 dependencies = [
     "django>=5.1",
-    {% if cookiecutter.allauth %}"django-allauth>=65.2",{% endif %}
+    {%- if cookiecutter.allauth %}"django-allauth>=65.2",{% endif %}
     "whitenoise>=6.8",
     "django-rich>=1.13",
-    "envrions[django]>=14.1.1",
+    "environs[django]>=14.1.1",
     "django-extensions>=3.2.3",
 ]
 
 [tool.uv]
 dev-dependencies = [
     "django-browser-reload",
-    "django-debug-toolbar",
+    {%- if cookiecutter.debug_toolbar %}"django-debug-toolbar",{% endif %}
     "django-simple-factory",
     "ruff",
     "ipdb",
