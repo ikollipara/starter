@@ -32,8 +32,6 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    {%- if cookiecutter.allauth %}"allauth", {% endif %}
-    {%- if cookiecutter.allauth %}"allauth.account", {% endif %}
     "django_browser_reload",
     {%- if cookiecutter.debug_toolbar %}"debug_toolbar", {% endif %}
     "django_extensions",
@@ -52,7 +50,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    {%- if cookiecutter.allauth %}"allauth.account.middleware.AccountMiddleware",{% endif %}
     "whitenoise.middleware.WhiteNoiseMiddleware",
     {%- if cookiecutter.debug_toolbar %}"debug_toolbar.middleware.DebugToolbarMiddleware",{% endif %}
     "django_browser_reload.middleware.BrowserReloadMiddleware",
@@ -176,17 +173,3 @@ STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
 }
 
-{% if cookiecutter.allauth %}
-# Django All Auth
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by email
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_USERNAME_REAUIRED = False
-ACCOUNT_EMAIL_REQUIRED = True
-{% endif %}

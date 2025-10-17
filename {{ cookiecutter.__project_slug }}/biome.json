@@ -1,9 +1,8 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+    "$schema": "https://biomejs.dev/schemas/2.2.6/schema.json",
     "formatter": {
         "enabled": true,
         "attributePosition":"multiline",
-        "indentSize": 2,
         "indentStyle":"space",
         "lineWidth": 120,
         "lineEnding":"lf",
@@ -14,6 +13,7 @@
             "arrowParentheses": "asNeeded",
             "bracketSameLine": false,
             "bracketSpacing": true,
+            "operatorLinebreak": "before",
             "semicolons": "asNeeded",
             "trailingCommas": "all"
         }
@@ -34,9 +34,6 @@
         }
     },
     "linter": {
-        "enabled": true
-    },
-    "organizeImports": {
         "enabled": true
     }
 }
