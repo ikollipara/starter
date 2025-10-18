@@ -12,7 +12,6 @@ from django.contrib import admin
 
 urlpatterns = [
     urls.path("admin/", admin.site.urls),
-    {% if cookiecutter.allauth %}urls.path("accounts/", urls.include("allauth.urls")),{% endif %}
     *static.static(conf.settings.STATIC_URL, document_root=conf.settings.STATIC_ROOT),
     *static.static(conf.settings.MEDIA_URL, document_root=conf.settings.MEDIA_ROOT),
 ]

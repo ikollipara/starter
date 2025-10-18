@@ -24,6 +24,7 @@ dev-dependencies = [
     "djade",
     "coverage",
     "tblib",
+    "honcho",
 ]
 
 [tool.ruff.isort]
