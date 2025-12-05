@@ -16,9 +16,22 @@ os.system("npm i --include-dev")
 
 os.system(f"mise set SECRET_KEY={secrets.token_urlsafe(32)}")
 
+if "{{ cookiecutter.database }}" == "postgres":
+    os.system("rm -rf ./docker/mysql")
+elif "{{ cookiecutter.database }}" == "mysql":
+    os.system("rm -rf ./docker/postgres")
+else:
+    os.system("rm -rf ./docker")
+
+if (
+    "{{ cookiecutter.email}}" == "console"
+    and "{{ cookiecutter.database}}" == "sqlite"
+):
+    os.system('rm -rf docker-compose.yml')
+
 os.system("git init")
 pathlib.Path(".gitignore").write_text(
-    ".venv\nnode_modules\n.env\n__pycache__/\nstatic/dist\nmedia/\n"
+    ".venv\nnode_modules\n.env\n__pycache__/\nstatic/dist\nmedia/\n.docker/\n"
 )
 pathlib.Path("static/dist").mkdir(parents=True, exist_ok=True)
 os.system("git add .")
