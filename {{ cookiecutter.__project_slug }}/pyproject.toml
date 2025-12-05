@@ -15,6 +15,7 @@ dependencies = [
     "django-http-compression[brotli]>=1.2.0",
     "uvicorn>=0.38.0",
     "django-vite>=3.1.0",
+    "{% if cookiecutter.database == 'mysql' %}mysqlclient>=2.2.7{% elif cookiecutter.database == 'postgres'%}psycopg[binary]>=3.3.1{% endif %}"
 ]
 
 [dependency-groups]

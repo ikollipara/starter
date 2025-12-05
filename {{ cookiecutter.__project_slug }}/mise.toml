@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ""
 INTERNAL_IPS = "127.0.0.1"
 PYTHONBREAKPOINT = "ipdb.set_trace"
 STORAGES_BACKEND = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+LOG_LEVEL="DEBUG"
 
 [tasks.manage]
 run = "uv run manage.py"
