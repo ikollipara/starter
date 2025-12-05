@@ -1,2 +1,0 @@
-django: uv run manage.py runserver
-vite: npm run dev

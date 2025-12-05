@@ -5,6 +5,7 @@
  * Main Entrypoint
  *------------------------------------------------------------**/
 
+import 'vite/modulepreload-polyfill';
 import "./scss/app.scss";
 import * as Turbo from "@hotwired/turbo";
 import { Application } from "@hotwired/stimulus";

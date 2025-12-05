@@ -14,7 +14,7 @@
             "bracketSameLine": false,
             "bracketSpacing": true,
             "operatorLinebreak": "before",
-            "semicolons": "asNeeded",
+            "semicolons": "always",
             "trailingCommas": "all"
         }
     },
@@ -23,9 +23,6 @@
         "enabled": true
     },
     "json": {
-        "assists": {
-            "enabled":  true
-        },
         "formatter": {
             "enabled": true
         },

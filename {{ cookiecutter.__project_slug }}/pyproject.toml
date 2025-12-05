@@ -7,24 +7,27 @@ description = "{{ cookiecutter.project_description }}"
 version = "0.0.0"
 requires-python = ">=3.14"
 dependencies = [
-    "django>=5.2",
+    "django>=6.0",
     "whitenoise>=6.11",
     "django-rich>=2.2.0",
-    "environs[django]>=14.3.0",
-    "django-extensions>=4.1",
+    "environs[django]>=14.5.0",
+    "django-tasks>=0.10.0",
+    "django-http-compression[brotli]>=1.2.0",
+    "uvicorn>=0.38.0",
+    "django-vite>=3.1.0",
 ]
 
 [dependency-groups]
 dev = [
     "django-browser-reload",
+    "django-watchfiles",
     {%- if cookiecutter.debug_toolbar %}"django-debug-toolbar",{% endif %}
-    "django-simple-factory",
+    "factory_boy",
     "ruff",
     "ipdb",
     "djade",
     "coverage",
     "tblib",
-    "honcho",
 ]
 
 [tool.ruff.isort]
@@ -36,7 +39,7 @@ parallel = true
 omit = ["conf/*.py", "manage.py"]
 concurrency = ["multiprocessing"]
 source = ["."]
-command_line = "manage.py test --keepdb --parallel"
+command_line = "uv run manage.py test --keepdb --parallel"
 
 [tool.coverage.report]
 omit = ["conf/*.py", "manage.py"]

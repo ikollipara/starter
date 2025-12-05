@@ -1,6 +1,6 @@
 // To learn more about SpruceCSS
 // Check out https://sprucecss.com/docs/
-
+@forward "overrides";
 @use '~sprucecss/scss/spruce' as *;
 
 @include generate-styles();

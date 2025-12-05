@@ -3,12 +3,11 @@ pre_prompt.py
 Ian Kollipara <ian.kollipara@gmail.com>
 2024-11-30
 
-PrePrompt Scripting
+Pre-prompt Scripting
 """
 
 import enum
 import io
-import platform
 import shutil
 import sys
 import typing
@@ -77,9 +76,9 @@ if not shutil.which("node") or not shutil.which("npm"):
     )
     exit(1)
 
-if not shutil.which("direnv"):
+if not shutil.which("mise"):
     write(
-        "direnv are not installed. Please install direnv",
+        "mise are not installed. Please install direnv",
         Color.RED,
         writer=sys.stderr,
     )

@@ -1,0 +1,95 @@
+# Name:    mise.toml
+# Author:  Ian Kollipara <ian.kollipara@gmail.com>
+# Created: 2025-12-05
+# Description:
+#   mise is a tool for managing dev environments.
+#   This file contains a preset of useful commands
+#   for working on Django projects.
+#   This is preferred way to handle:
+#   - envvars
+#   - scripting
+#   - building
+
+
+[tools]
+uv = "latest"
+python = "3.13"
+node = "latest"
+
+[env]
+DATABASE_URL = "sqlite:///./dev.db"
+EMAIL_URL = ":memory:"
+TASKS_BACKEND = "django_tasks.backends.immediate.ImmediateBackend"
+ALLOWED_HOSTS = ""
+INTERNAL_IPS = "127.0.0.1",
+PYTHONBREAKPOINT = "ipdb.set_trace"
+STORAGES_BACKEND = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+[tasks.manage]
+run = "uv run manage.py"
+description = "Run Django's manage.py"
+env = { DEBUG = true }
+
+[tasks.test]
+run = "uv run manage.py test"
+description = "Run Django Tests"
+depends = ["build"]
+depends_post = ["clean"]
+
+[tasks.test.env]
+DEBUG = true
+TASKS_BACKEND = "django.tasks.backends.dummy.DummyBackend"
+EMAIL_URL=":memory:"
+DATABASE_URL = "sqlite:///:inmemory:"
+STORAGES_BACKEND = "django.core.files.storage.FileSystemStorage"
+
+[tasks.vite-dev]
+run = "npm run dev"
+hide = true
+
+[tasks.django-dev]
+run = "uv run manage.py runserver"
+hide = true
+
+[tasks.dev]
+run = [
+  { tasks = ["vite-dev", "django-dev"] }
+]
+description = "Run development servers (django and vite)"
+env = { DEBUG = true }
+
+[tasks.vite-build]
+run = "npm run build"
+hide = true
+
+[tasks.django-build]
+run = [
+  "mkdir staticfiles",
+  "uv run manage.py collectstatic",
+]
+hide = true
+
+[tasks.build]
+run = [
+  { task = "vite-build" },
+  { task = "django-build" },
+]
+description = "Build Frontend Assets"
+
+[tasks.clean]
+run = [
+  "rm -rf staticfiles",
+  "rm -rf ./static/dist/*",
+]
+description = "Clean Built Frontend Assets"
+
+[tasks.preview]
+run = [
+  "uv run gunicorn --workers=1 conf.wsig:application",
+]
+description = "Run a Preview Build of the Site"
+depends = "build"
+depends_post = "clean"
+env = { DEBUG = false, ALLOWED_HOSTS="localhost,127.0.0.1" }
+
+

@@ -19,11 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environs.Env()
 
-env.read_env(BASE_DIR / ".env")
-if "test" in sys.argv:
-    env.read_env(BASE_DIR / ".env.testing", override=True)
-
-
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
@@ -32,18 +27,21 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django_browser_reload",
-    {%- if cookiecutter.debug_toolbar %}"debug_toolbar", {% endif %}
-    "django_extensions",
-    "django_simple_factory",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_browser_reload",
+    "django_watchfiles",
+    "django_tasks",
+    "django_http_compression",
+    "django_vite",
+    {%- if cookiecutter.debug_toolbar %}"debug_toolbar", {% endif %}
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "django_http_compression.middleware.HttpCompression",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -87,7 +85,7 @@ WSGI_APPLICATION = "conf.wsgi.application"
 INTERNAL_IPS = env.list("INTERNAL_IPS", [])
 LOG_LEVEL = env.str("LOG_LEVEL")
 
-EMAIL_BACKEND = env.str("EMAIL_BACKEND")
+vars().update(env.dj_email_url("EMAIL_URL"))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
@@ -173,3 +171,14 @@ STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
 }
 
+TASKS = {
+    "default": {
+        "BACKEND": env.str("TASKS_BACKEND"),
+    }
+}
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG
+    }
+}
