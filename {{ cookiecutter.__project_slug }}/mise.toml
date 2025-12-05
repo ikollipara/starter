@@ -34,7 +34,7 @@ DATABASE_URL = "sqlite:///./dev.db"
 EMAIL_URL = "{% if cookiecutter.email == 'mailpit' %}smtp://localhost:1025{% elif cookiecutter.email == 'console' %}console:{% endif %}"
 TASKS_BACKEND = "django_tasks.backends.immediate.ImmediateBackend"
 ALLOWED_HOSTS = ""
-INTERNAL_IPS = "127.0.0.1",
+INTERNAL_IPS = "127.0.0.1"
 PYTHONBREAKPOINT = "ipdb.set_trace"
 STORAGES_BACKEND = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 

@@ -11,7 +11,7 @@ import pathlib
 import secrets
 
 os.system("uv sync")
-os.system("npm i --include-dev")
+os.system("npm i")
 
 
 os.system(f"mise set SECRET_KEY={secrets.token_urlsafe(32)}")
