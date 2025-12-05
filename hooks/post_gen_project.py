@@ -10,9 +10,9 @@ import os
 import pathlib
 import secrets
 
+os.system("mise install")
 os.system("uv sync")
 os.system("npm i")
-
 
 os.system(f"mise set SECRET_KEY={secrets.token_urlsafe(32)}")
 

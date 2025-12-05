@@ -13,7 +13,7 @@
 {%- if cookiecutter.email == 'mailpit' or cookiecutter.database != 'sqlite' %}
 [hooks]
 enter = "docker compose up -d"
-leave = "docker compose down -f {{ cookiecutter.__project_slug }}/docker-compose.yml"
+leave = "docker compose -f {{ cookiecutter.__project_slug }}/docker-compose.yml down"
 {% endif -%}
 
 [tools]
