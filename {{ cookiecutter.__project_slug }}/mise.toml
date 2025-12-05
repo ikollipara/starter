@@ -22,7 +22,7 @@ python = "3.13"
 node = "latest"
 
 [env]
-DB_USER = "{{ cookiecutter.database_user }}"
+DB_USER = "{{ cookiecutter.__database_user }}"
 DB_NAME = "{{ cookiecutter.database_name }}"
 DB_PASSWORD = "password"
 DB_PORT = {{ cookiecutter.__database_port }}"
