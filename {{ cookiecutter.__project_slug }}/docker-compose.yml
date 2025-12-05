@@ -1,0 +1,30 @@
+services:
+  db:
+    platform: linux/amd64
+    image: {% if cookiecutter.database == 'postgres' %}postgres:latest{% elif cookiecutter.database == 'mysql' %}mysql:latest{% endif %}
+    ports:
+      - {% if cookiecutter.database == 'postgres' %}"5432:5432"{% elif cookiecutter.database == 'mysql' %}"3306:3306"{% endif %}
+    environment:
+      {%- if cookiecutter.database == 'mysql' %}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      {% elif cookiecutter.database == 'postgres' %}
+      PGPASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      {% endif -%}
+    volumes:
+      - '.docker/{{ cookiecutter.database }}:/var/lib/{% if cookiecutter.database == 'mysql' %}mysql{% elif cookiecutter.database == 'postgres' %}postgresql{% endif %}'
+      - './docker/{{ cookiecutter.database }}:/10-setup-database.sql:/docker-entrypoint-initdb.d/10-setup-database.sql'
+
+  {%- if cookiecutter.email == 'mailpit' %}
+  mailpit:
+    platform: linux/amd64
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+  {% endif %}

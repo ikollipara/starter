@@ -3,14 +3,31 @@
   "project_description": "",
   "author_name": "",
   "author_email": "{{ cookiecutter.author_name }}@example.com",
-  "debug_toolbar": true,
+  "debug_toolbar": false,
+  "database": ["sqlite", "postgres", "mysql"],
+  "database_name": "django",
+  "email": ["console", "mailpit"],
   "__project_slug": "{{ cookiecutter.project_name|replace(' ', '_')|replace('-', '_')|lower }}",
   "__project_app_class": "{{ cookiecutter.__project_slug|replace('_', ' ')|title|replace(' ', '') }}",
+  "__database_user": "django",
+  "__database_port": "{{ 3306 if cookiecutter.database == 'mysql' else 5432 }}",
   "__prompts__": {
     "project_name": "What is the name of the project?",
     "project_description": "What is a one sentence summary of the project?",
     "author_name": "What is your name?",
     "author_email": "What is your email?",
-    "debug_toolbar": "Install Debug-Toolbar?"
+    "debug_toolbar": "Install Debug-Toolbar?",
+    "database": {
+      "__prompt__": "Which database to configure?",
+      "sqlite": "Sqlite3",
+      "postgres": "Postgresql (Requires Docker)",
+      "mysql": "Mysql (Requires Docker)"
+    },
+    "database_name": "What is the database name? (Only matters for postgres and mysql)",
+    "email": {
+      "__prompt__": "Which Email to configure?",
+      "console": "Django's Email Console Backend",
+      "mailpit": "Mailpit (Requires Docker)"
+    }
   }
 }

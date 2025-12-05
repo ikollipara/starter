@@ -10,6 +10,11 @@
 #   - scripting
 #   - building
 
+{%- if cookiecutter.email == 'mailpit' or cookiecutter.database != 'sqlite' %}
+[hooks]
+enter = "docker compose up -d"
+leave = "docker compose down"
+{% endif -%}
 
 [tools]
 uv = "latest"
@@ -17,8 +22,16 @@ python = "3.13"
 node = "latest"
 
 [env]
+DB_USER = "{{ cookiecutter.database_user }}"
+DB_NAME = "{{ cookiecutter.database_name }}"
+DB_PASSWORD = "password"
+DB_PORT = {{ cookiecutter.__database_port }}"
+{%- if cookiecutter.database != 'sqlite' %}
+DATABASE_URL = "{{ cookiecutter.database }}://{% raw %}{{env.DB_USER}}:{{env.DB_PASSWORD}}@127.0.0.1:{{env.DB_PORT}}/{{env.DB_NAME}}{% endraw %}"
+{%- else %}
 DATABASE_URL = "sqlite:///./dev.db"
-EMAIL_URL = ":memory:"
+{% endif %}
+EMAIL_URL = "{% if cookiecutter.email == 'mailpit' %}smtp://localhost:1025{% elif cookiecutter.email == 'console' %}console:{% endif %}"
 TASKS_BACKEND = "django_tasks.backends.immediate.ImmediateBackend"
 ALLOWED_HOSTS = ""
 INTERNAL_IPS = "127.0.0.1",
@@ -40,7 +53,11 @@ depends_post = ["clean"]
 DEBUG = true
 TASKS_BACKEND = "django.tasks.backends.dummy.DummyBackend"
 EMAIL_URL=":memory:"
+{%- if cookiecutter.database != 'sqlite' %}
+DATABASE_URL = "{{ cookiecutter.database }}://{% raw %}{{env.DB_USER}}:{{env.DB_PASSWORD}}@127.0.0.1:{{env.DB_PORT}}/test_{{env.DB_NAME}}{% endraw %}"
+{%- else %}
 DATABASE_URL = "sqlite:///:inmemory:"
+{% endif %}
 STORAGES_BACKEND = "django.core.files.storage.FileSystemStorage"
 
 [tasks.vite-dev]
