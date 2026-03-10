@@ -64,21 +64,9 @@ write()
 
 ### Checks ###
 
-if not shutil.which("uv"):
-    write("UV is not installed. Please install UV", Color.RED, writer=sys.stderr)
-    exit(1)
-
-if not shutil.which("node") or not shutil.which("npm"):
-    write(
-        "Node and NPM are not installed. Please install Node and NPM",
-        Color.RED,
-        writer=sys.stderr,
-    )
-    exit(1)
-
 if not shutil.which("mise"):
     write(
-        "mise are not installed. Please install direnv",
+        "mise are not installed. Please install mise",
         Color.RED,
         writer=sys.stderr,
     )

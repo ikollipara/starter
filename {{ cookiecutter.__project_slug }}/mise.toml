@@ -10,15 +10,9 @@
 #   - scripting
 #   - building
 
-{%- if cookiecutter.email == 'mailpit' or cookiecutter.database != 'sqlite' %}
-[hooks]
-enter = "docker compose up -d"
-leave = "docker compose -f {{ cookiecutter.__project_slug }}/docker-compose.yml down"
-{% endif -%}
-
 [tools]
 uv = "latest"
-python = "3.13"
+python = "3.14"
 node = "latest"
 
 [env]
@@ -38,6 +32,11 @@ INTERNAL_IPS = "127.0.0.1"
 PYTHONBREAKPOINT = "ipdb.set_trace"
 STORAGES_BACKEND = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOG_LEVEL="DEBUG"
+WATCHFILES_IGNORE_PERMISSION_DENIED = true
+
+[tasks.docker]
+run = "docker"
+description = "Run docker"
 
 [tasks.manage]
 run = "uv run manage.py"
@@ -61,26 +60,26 @@ DATABASE_URL = "sqlite:///:inmemory:"
 {% endif %}
 STORAGES_BACKEND = "django.core.files.storage.FileSystemStorage"
 
-[tasks.vite-dev]
+[tasks."dev:vite"]
 run = "npm run dev"
 hide = true
 
-[tasks.django-dev]
+[tasks."dev:django"]
 run = "uv run manage.py runserver"
 hide = true
 
 [tasks.dev]
 run = [
-  { tasks = ["vite-dev", "django-dev"] }
+  { tasks = ["dev:vite", "dev:django"] }
 ]
 description = "Run development servers (django and vite)"
 env = { DEBUG = true }
 
-[tasks.vite-build]
+[tasks."build:vite"]
 run = "npm run build"
 hide = true
 
-[tasks.django-build]
+[tasks."build:static"]
 run = [
   "mkdir staticfiles",
   "uv run manage.py collectstatic",
@@ -89,8 +88,8 @@ hide = true
 
 [tasks.build]
 run = [
-  { task = "vite-build" },
-  { task = "django-build" },
+  { task = "build:vite" },
+  { task = "build:static" },
 ]
 description = "Build Frontend Assets"
 

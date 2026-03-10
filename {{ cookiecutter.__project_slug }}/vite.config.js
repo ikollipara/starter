@@ -13,7 +13,7 @@ import { analyzer } from "vite-bundle-analyzer";
 import * as path from "node:path";
 
 export default defineConfig({
-  plugins: [analyzer()],
+  plugins: [analyzer({analyzerMode: "static"})],
   base: "/static/",
   build: {
     manifest: "manifest.json",

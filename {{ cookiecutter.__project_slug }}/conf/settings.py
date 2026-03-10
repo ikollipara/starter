@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_browser_reload",
     "django_watchfiles",
-    "django_tasks",
+    "django_tasks_db",
     "django_http_compression",
     "django_vite",
     {%- if cookiecutter.debug_toolbar %}"debug_toolbar", {% endif %}
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django_http_compression.middleware.HttpCompression",
+    "django_http_compression.middleware.HttpCompressionMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
