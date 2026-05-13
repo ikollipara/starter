@@ -21,7 +21,6 @@ dependencies = [
 [dependency-groups]
 dev = [
     "django-browser-reload",
-    "django-watchfiles",
     {%- if cookiecutter.debug_toolbar %}"django-debug-toolbar",{% endif %}
     "factory_boy",
     "ruff",
@@ -30,6 +29,14 @@ dev = [
     "coverage",
     "tblib",
 ]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "ERA", "S", "BLE", "FBT", "B", "CPY", "DJ", "LOG", "T20", "SIM", "PTH", "I", "C90", "N", "D", "PLR", "FURB"]
+
 
 [tool.ruff.isort]
 force-single-line = true

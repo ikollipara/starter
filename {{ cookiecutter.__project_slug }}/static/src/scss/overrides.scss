@@ -1,3 +1,2 @@
-@use "sprucecss/scsss/spruce" 
-  // with () 
-  as *;
+@use "sprucecss/scss/spruce" as *;
+// @use "sprucecss/scss/spruce" with () as *;
